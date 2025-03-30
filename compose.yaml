@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+    command: bash -c "rm -f tmp/pids/server.pid && ./bin/dev"
+    tty: true
+    container_name: fishing
+    volumes:
+      - .:/app:cached
+    environment:
+      - RAILS_ENV=${RAILS_ENV:-development}
+    ports:
+      - "3000:3000"
