@@ -1,8 +1,8 @@
-<%= turbo_frame_tag bait do %>
+<%= tag.div id: dom_id(bait) do %>
   <div class="bait">
-    <%= link_to image_tag(bait.image), bait, data: { turbo_frame: "_top" } %>
+    <%= link_to image_tag(bait.image), bait %>
     <div class="name">
-      <%= link_to bait.name, bait, data: { turbo_frame: "_top" } %>
+      <%= link_to bait.name, bait %>
     </div>
     <div class="category">
       <%= bait.category %>
