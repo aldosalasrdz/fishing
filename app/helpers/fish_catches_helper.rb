@@ -31,4 +31,10 @@ module FishCatchesHelper
   def currently_sorted?(column)
     params[:sort] == column.to_s
   end
+
+  def render_update_stats_stream(fish_catches)
+    turbo_stream.update 'stats' do
+      render 'tackle_box_items/stats', fish_catches: fish_catches
+    end
+  end
 end
