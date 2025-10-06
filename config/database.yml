@@ -21,5 +21,10 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8mb4
+  host: <%= ENV["DB_HOST"] %>
+  port: 3306
+  database: fishing_production
+  username: root
+  password: <%= ENV["MYSQL_ROOT_PASSWORD"] %>

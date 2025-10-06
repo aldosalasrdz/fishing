@@ -1,0 +1,56 @@
+service: fishing
+
+image: aldosalasrdz/fishing
+
+servers:
+  web:
+    - 164.90.144.85
+
+proxy:
+  ssl: true
+  host: fishing.aldosalas.com
+  app_port: 3000
+
+registry:
+  username: aldosalasrdz
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+builder:
+  arch: amd64
+
+env:
+  clear:
+    DB_HOST: fishing-db
+  secret:
+    - RAILS_MASTER_KEY
+    - MYSQL_ROOT_PASSWORD
+    - REDIS_URL
+
+aliases:
+  console: app exec --interactive --reuse "bin/rails console"
+  shell: app exec --interactive --reuse "bash"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+
+accessories:
+  db:
+    image: mysql:8.0
+    host: 164.90.144.85
+    port: 3306
+    env:
+      clear:
+        MYSQL_ROOT_HOST: '%'
+      secret:
+        - MYSQL_ROOT_PASSWORD
+    files:
+      # - config/mysql/production.cnf:/etc/mysql/my.cnf
+      - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
+    directories:
+      - data:/var/lib/mysql
+  redis:
+    image: redis:7.0
+    host: 164.90.144.85
+    port: 6379
+    directories:
+      - data:/data

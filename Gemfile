@@ -64,3 +64,7 @@ end
 
 # Use Pagy for pagination
 gem 'pagy', '~> 5.5'
+
+gem "dockerfile-rails", ">= 1.7", :group => :development
+
+gem "mysql2", "~> 0.5"
