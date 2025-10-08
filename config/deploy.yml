@@ -37,7 +37,7 @@ accessories:
   db:
     image: mysql:8.0
     host: 164.90.144.85
-    port: 3306
+    port: "127.0.0.1:3306:3306"
     env:
       clear:
         MYSQL_ROOT_HOST: '%'
